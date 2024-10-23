@@ -1,0 +1,249 @@
+CODES WRITTEN BY STUDENT: 223025636
+YEAR 2 INFORMATION SYSTEMS
+
+1. Code to check whether a number entered by the user is even or odd using if-else.
+
+import javax.swing.*;
+import java.util.Scanner;
+//Question 1
+//ODD OR EVEN CODE
+
+public class Odd_Even {
+    public static void main(String[] args) {
+        int number;
+        //taking user input
+        Scanner input = new Scanner(System.in);
+        System.out.print("Enter number: ");
+        number = input.nextInt();
+        //zero checker
+        if (number  == 0)
+            System.out.println(number + " = Zero");
+        //even number checking
+        else if(number % 2 == 0) {
+            System.out.println(number + " is Even");
+        }else { //odd number
+            System.out.println(number + " is Odd");
+
+        }
+    }
+}
+
+
+
+2. Java program to take a grade (A, B, C, D, F) as input and print out a message based on the grade using the Switch statement.
+
+//Grade based on letters
+
+import java.util.Scanner;
+
+public class Switch_letters {
+    public static void main(String[] args) {
+        Scanner letter = new Scanner(System.in);
+        System.out.print("Enter Grade: ");
+        char letter_1 = letter.next().charAt(0);
+        switch (letter_1) {
+            case 'A':
+                System.out.println("The marks range is: 75-100");
+                break;
+            case 'B':
+                System.out.println("The marks range is: 65-74");
+                break;
+                case 'C':
+                    System.out.println("The marks range is: 50-64");
+                    break;
+            case 'D':
+                System.out.println("The marks range is: 40-49");
+                break;
+            case 'F':
+                System.out.println("The marks range is: 0-39");
+                break;
+            default:
+                System.out.println("Invalid input");
+        }
+    }
+}
+
+
+3. A program that checks if a year is a leap year or not using conditional statements:
+//Code to check if a year is a leap year or not
+
+import java.util.Scanner;
+public class Leap_Year {
+    public static void main(String[] args) {
+      //taking user input:
+      Scanner year = new Scanner(System.in);
+        System.out.print("Enter a year:");
+        int  year1 = year.nextInt();
+//leap year is divisible by either 4, 100, or 400,
+        if(year1 % 4 ==0 || year1 % 100 ==0 || year1 % 400 ==0) {
+            System.out.println(year1 + " Is a Leap Year");
+        }else {
+            System.out.println(year1 + " Is not a Leap Year");
+        }
+    }
+}
+
+
+4. A program to take three numbers as input and determine which one is the largest using if-else-if:
+//Code to compare 3 numbers entered by user
+import java.util.Scanner;
+public class Number_Comparison {
+    public static void main(String[] args) {
+        //userinputs of 3 numbers
+        Scanner num1_scanner = new Scanner(System.in);
+        System.out.print("Enter the first number: ");
+        int number1 = num1_scanner.nextInt();
+        Scanner num2_scanner = new Scanner(System.in);
+        System.out.print("Enter the second number: ");
+        int number2 = num2_scanner.nextInt();
+        Scanner num3_scanner = new Scanner(System.in);
+        System.out.print("Enter the third number: ");
+        int number3 = num3_scanner.nextInt();
+//comparisons to determine the largest number
+        if (number1 > number2 && number1 > number3) {
+            System.out.println(number1 + " is greater than " + number2 + " and " + number3);
+        } else if (number2 > number1 && number2 > number3) {
+            System.out.println(number2 + " is greater than " + number3 + " and " + number1);
+        } else
+            if (number3 > number1 && number3 > number2) {
+                System.out.println(number3 + " is greater than " + number2 + " and " + number1);
+            }
+    }
+}
+
+
+5. A Java program that takes a number from the user and checks whether it is positive, negative, or zero:
+//Number checking, positive , negative or zero
+import java.util.Scanner;
+public class Number_Checker5 {
+    public static void main(String[] args) {
+        //taking user input
+        Scanner input = new Scanner(System.in);
+        System.out.print("Enter a number: ");
+        int number = input.nextInt();
+        if(number<0)  //negative number checking
+            System.out.println(number +" is negative");
+        else if (number>0) //positive number chacking
+            System.out.println(number +" is positive");
+        else //check is the number is zero
+            System.out.println("Number is zero");
+    }
+}
+
+
+6. Triangle pattern of numbers 1 to 7:
+//Triangle number pattern
+public class Triangle_Pattern6 {
+    public static void main(String[] args) {
+        int rows = 7; // Number of rows in the triangle
+
+        for (int i = 1; i <= rows; i++) {
+            // Print the rows
+            for (int j = 1; j <= rows - i + 1; j++) {
+                System.out.print(i);
+            }
+            //Printing next code line,
+            System.out.println();
+
+        }
+    }
+}
+
+
+7. Java program that prints the output a diamond shape:
+import java.util.Scanner;
+
+public class Diamond_Shape7 {
+    public static void main(String[] args) {
+Scanner number = new Scanner(System.in);
+System.out.println("Enter the number of rows of the diamond: ");
+int n = number.nextInt();
+
+               printDiamond(n);
+            }
+
+            public static void printDiamond(int n) {
+                // Top diamond part
+                for (int i = 1; i <= n; i++) {
+                    for (int j = i; j < n; j++) {
+                        System.out.print(" ");
+                    }
+                    for (int j = 1; j <= (2 * i - 1); j++) {
+                        System.out.print("*");
+                    }
+                    System.out.println();
+                }
+                // Lower diamond part
+                for (int i = n - 1; i >= 1; i--) {
+                    for (int j = n; j > i; j--) {
+                        System.out.print(" ");
+                    }
+                    for (int j = 1; j <= (2 * i - 1); j++) {
+                        System.out.print("*");
+                    }
+                    System.out.println();
+                }
+            }
+        }
+
+
+    
+
+
+8. A program that calculates and prints the average of all the elements in an array. Input array is {10,12,34,23,56,78}:
+//Calculating the average of array elements
+public class Average {
+    public static void main(String[] args) {
+        //array initialization
+        int[] numbers = {10,12,34,23,56,78};
+        int sum = 0;
+        float average = 0;
+        for (int i = 0; i < numbers.length; i++) {
+            //sum calculation
+            sum += numbers[i];
+            //average calculation
+           average = (float) sum / numbers.length;
+        }
+        System.out.println("Average of array numbers is: " + average);
+    }
+}
+
+
+9. A program to reverse the elements of an array and print them. Input Array{3,4,6,1,9,7,5,8}
+
+//Code to reverse array elememtns
+public class Reverse_Array9 {
+    public static void main(String[] args) {
+        //array initialization
+        int[] numbers = {3,4,6,1,9,7,5,8};
+        int k;
+        int total = numbers.length;
+                for(k=total-1; k<numbers.length; k--)
+                    System.out.println(numbers[k]+" ");
+
+
+    }
+}
+
+
+10. A program that finds and prints the largest element in an array of integers. Input array {34,23,12,45,67,89,234,26,10,30,43}:
+//Finding Largest Number in an array
+import java.util.Arrays;
+
+public class Array_Max {
+    public static void main(String[] args) {
+        //array initialization
+        int[] numbers = {34,23,12,45,67,89,234,26,10,30,43};
+        int largest =numbers [0];
+        int i;
+        //for loop to walkthrough the array
+        for(i=0; i<numbers.length; i++){
+            if(numbers[i]>largest){
+                largest = numbers[i];
+
+            }
+        }
+        System.out.println("The largest array element/number is "+largest);
+    }
+
+}
