@@ -1,0 +1,405 @@
+STUDENT REG NUMBER: 223025636
+JAVA PROGRAMMING ASSIGNMENT
+
+QUESTION 1:
+
+#Reproducing the back interest calculation program using a loan object with three set parameters, default constructor[annual and monthly interest and number of years.
+#Get from the created object, calculate interest from the created object, set and get monthly interest, use set method and use this keyword.
+#Calculate amount to be paid monthly and total amount to be paid.
+# Main[ program get monthly and total amount.
+
+CODE-SOLUTION##
+
+import javax.swing.JOptionPane;
+import java.lang.reflect.Constructor;
+
+public class SimpleLoanComputeProgram {
+    private static  double annualInterestRate = 0;
+    private static double monthlyInterestRate;
+    private static  int numberOfYears = 0;
+
+//Get Method
+    public double GetmonthlyInterestRate() {
+        double monthlyPayment = 0;
+        return monthlyPayment;
+    }
+
+public double GetTotalPayment() {
+    double totalPayment = 0;
+    return totalPayment;
+}
+//Setter Methods
+public void SetMonthlyInterestRate(double monthlyInterestRate) {
+        this.monthlyInterestRate = monthlyInterestRate;
+}
+public void setTotalPayment(double totalPayment) {
+        totalPayment = totalPayment;
+}
+    //Default Constructor
+    public SimpleLoanComputeProgram(double annualInterestRate, double monthlyInterestRate, int numberOfYears) {
+        this.annualInterestRate = annualInterestRate;
+        this.monthlyInterestRate = monthlyInterestRate;
+        this.numberOfYears = numberOfYears;
+
+    }
+
+
+
+    public static void main(String[] args) {
+
+        SimpleLoanComputeProgram obj = new SimpleLoanComputeProgram(annualInterestRate, monthlyInterestRate, numberOfYears);
+        // Enter yearly interest rate from pane
+        String annualInterestRateString = JOptionPane.showInputDialog("Enter yearly interest rate");
+
+        // Convert string to double
+        double annualInterestRate = Double.parseDouble(annualInterestRateString);
+
+        // Then monthly interest rate is
+        double monthlyInterestRate = annualInterestRate / 1200;
+
+        // Number of years to be paid the interest
+        String numberOfYearString = JOptionPane.showInputDialog("Enter the number of years");
+
+        // Convert number of years into integer
+        int numberOfYears = Integer.parseInt(numberOfYearString);
+
+        // Enter loan amount you need
+        String loanAmountString = JOptionPane.showInputDialog("Enter loan amount");
+
+        // Convert loan amount to double
+        double loanAmount = Double.parseDouble(loanAmountString);
+
+        // Calculate monthly payment (Formula for monthly payment on a loan)
+        double monthlyPayment = (loanAmount * monthlyInterestRate) /
+                (1 - Math.pow(1 + monthlyInterestRate, -numberOfYears * 12));
+
+        // Calculate total payment over the life of the loan
+        double totalPayment = monthlyPayment * numberOfYears * 12;
+
+        // Display monthly payment
+        JOptionPane.showMessageDialog(null, "Your monthly payment is: " + String.format("%.2f", monthlyPayment));
+
+        // Display total payment over the life of the loan
+        JOptionPane.showMessageDialog(null, "Total payment over the life of the loan is: " + String.format("%.2f", totalPayment));
+    }
+}
+
+
+___________________________________________________________________________________________________________________________________
+
+
+QUESTION 2:
+creating a Graphical User Interface(GUI) for a school system with labels, panes and buttons. One button to display student information from the database and another to display modules information from the database.
+
+CODES##
+---CODE TO CREATE students table in SQL database----
+import java.sql.DriverManager;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+public class Database_Connection {
+
+    public static void main(String[] args) {
+        String jdbcUrl = "jdbc:mysql://localhost:3306/School";
+        String username = "root";
+        String password = "";
+
+        // CREATE TABLE
+        try (Connection connection = DriverManager.getConnection(jdbcUrl, username, password)) {
+
+            String createTableSQL = "CREATE TABLE IF NOT EXISTS students("
+                    + "Student_ID INT PRIMARY KEY AUTO_INCREMENT,"
+                    + "Full_Name VARCHAR(50),"
+                    + "Department VARCHAR(50),"
+                    + "Level INT,"
+                    + "Reg_Number INT)";
+            Statement statement = connection.createStatement();
+            statement.execute(createTableSQL);
+            System.out.println("Table Created");
+
+        } catch (SQLException e) {
+            System.err.println("Failed to create table: " + e.getMessage());
+            // e.printStackTrace(); // Optional: Uncomment this line to get the full stack trace.
+        }
+    }
+}
+
+
+------CODE TO INSERT A RECORD INTO students TABLE--
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+
+/**
+ *
+ * @author Admin
+ */
+//CODE TO INSERT DATA INTO THE Students Table
+//SQL IMPORTS
+import java.sql.DriverManager;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+public class Table_Data_Insertion {  // public class
+
+    public static void main(String[] args) {
+        String jdbcUrl = "jdbc:mysql://localhost:3306/School"; // Database name
+        String username = "root";
+        String password = "";
+
+        // SQL query to insert data into the 'students' table
+        String insertSQL = "INSERT INTO students (Full_Name, Department, Level, Reg_Number) VALUES(?, ?, ?, ?)";
+
+        try (
+            Connection connection = DriverManager.getConnection(jdbcUrl, username, password);
+            PreparedStatement preparedStatement = connection.prepareStatement(insertSQL)
+        ) {
+            // prepared statement values
+            preparedStatement.setString(1, "Sean Mavhima");  // Full_Name
+            preparedStatement.setString(2, "Information Systems"); // Department
+            preparedStatement.setInt(3, 2);           // Level
+            preparedStatement.setString(4, "223025636"); // Registration Number
+
+            // Execute to insert data
+            preparedStatement.executeUpdate();
+            System.out.println("Record inserted successfully");
+
+        } catch (SQLException e) {
+            //error message when the program fails to insert a record
+            System.err.println("Error inserting record: " + e.getMessage());
+        }
+    }
+}
+-----------------CODE TO CREATE AND INSERT DATA INTO THE Modules TABLE-----
+import java.sql.DriverManager;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+public class Modules_Table_CreateAndInsert {
+
+    public static void main(String[] args) {
+        String jdbcUrl = "jdbc:mysql://localhost:3306/School";
+        String username = "root";
+        String password = "";
+
+        // CREATE TABLE
+        try (Connection connection = DriverManager.getConnection(jdbcUrl, username, password)) {
+
+            String createTableSQL = "CREATE TABLE IF NOT EXISTS Modules ("
+                    + "Module_Code INT PRIMARY KEY AUTO_INCREMENT, "
+                    + "Module_Name VARCHAR(50), "
+                    + "Department VARCHAR(50), "
+                    + "Credits INT, "
+                    + "School VARCHAR(20))";  // 
+            Statement statement = connection.createStatement();
+            statement.execute(createTableSQL);
+            System.out.println("Table Created");
+
+        } catch (SQLException e) {
+            System.err.println("Failed to create table: " + e.getMessage());
+           
+        }
+    }
+}
+*/
+
+import java.sql.DriverManager;
+import java.sql.Connection;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+public class Modules_Table_CreateAndInsert {
+    
+    public static void main(String[] args) {
+        String jdbcUrl = "jdbc:mysql://localhost:3306/School";
+        String username = "root";
+        String password = "";
+
+        // INSERT DATA INTO TABLE
+        try (Connection connection = DriverManager.getConnection(jdbcUrl, username, password)) {
+
+            String insertDataSQL = "INSERT INTO Modules (Module_Name, Department, Credits, School) VALUES "
+                    + "('Java Programming', 'Information Systems', 10, 'IS'),"
+                    + "('C++', 'Computer Science', 10, 'ICT'),"
+                    + "('Python', 'Computer Engineering', 10, 'Engineering'),"
+                    + "('JavaScript', 'Information Systems', 5, 'IS');";
+            
+            Statement statement = connection.createStatement();
+            statement.executeUpdate(insertDataSQL);
+            System.out.println("Data inserted successfully");
+
+        } catch (SQLException e) {
+            System.err.println("Failed to insert data: " + e.getMessage());
+        }
+    }
+}
+-----------------------------------------------------------------------------------------------------------------------------
+I created a friendly user interface with a JFrame from, labels, buttons, panels and scroll panes.
+I then created a class for the Display Info button to display student info in the students database table:
+
+CODE of the DisplayStudentInfo.java class file for the DisplayStudentInfo button:
+//Imports
+import java.awt.BorderLayout;
+import java.sql.*;
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+
+public class DisplayStudentInfo {
+    //DISPLAY STUDENTS INFO BUTTON:
+    private final JTable studentTable;  // Holds data in a tabular format
+    private final JScrollPane jScrollPane1;  // I used Scrollpane to show info
+    private final JButton jButton2;  // Button to display student info
+
+    // Constructor to initialize the JFrame and components
+    public DisplayStudentInfo() {
+        //table initialization + button n scroll pane
+        studentTable = new JTable();
+        jScrollPane1 = new JScrollPane(studentTable);
+        jButton2 = new JButton("Display Student Info");
+
+        // Add ActionListener to the button
+        jButton2.addActionListener(evt -> jButton2ActionPerformed(evt));
+
+        // Frame layout code
+        JFrame frame = new JFrame("Display Student Info");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setLayout(new BorderLayout());
+        frame.add(jScrollPane1, BorderLayout.CENTER);
+        frame.add(jButton2, BorderLayout.SOUTH);
+        frame.setSize(600, 400);
+        frame.setVisible(true);
+    }
+
+    // Method to handle button click and display student info from the database
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {
+        // Database connection part
+        String jdbcUrl = "jdbc:mysql://localhost:3306/school";  // Adjust your database URL
+        String username = "root";
+        String password = "";  //Password is empty [not set]
+
+        // SQL query to fetch data from the 'students' table---------
+        String query = "SELECT Full_Name, Department, Level, Reg_Number FROM students";
+
+        // Usig try
+        try (Connection connection = DriverManager.getConnection(jdbcUrl, username, password);
+             Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(query)) {
+
+            // Prepare the table model with column names//
+            DefaultTableModel tableModel = new DefaultTableModel();
+            tableModel.addColumn("Full Name");
+            tableModel.addColumn("Department");
+            tableModel.addColumn("Level");
+            tableModel.addColumn("Registration Number");
+
+            // Populate the table model with data from the result
+            while (resultSet.next()) {
+                String fullName = resultSet.getString("Full_Name");
+                String department = resultSet.getString("Department");
+                int level = resultSet.getInt("Level");
+                String regNumber = resultSet.getString("Reg_Number");
+                tableModel.addRow(new Object[]{fullName, department, level, regNumber});
+            }
+
+            // Set the table model to the JTable
+            studentTable.setModel(tableModel);
+
+        } catch (SQLException e) {
+            // Show an error message if the database query fails
+            JOptionPane.showMessageDialog(null, "Error fetching data: " + e.getMessage());
+            
+        }
+    }
+
+    // Main method to run the DisplayStudentInfo application
+    public static void main(String[] args) {
+        javax.swing.SwingUtilities.invokeLater(DisplayStudentInfo::new);  // Initilize app and run it
+    }
+}
+____________________________________________________________________________________________________________________________
+
+CODE of the DisplayModules.java class file for the Database button:
+
+//DATABASE BUTTON CLASS
+import java.awt.BorderLayout;
+import java.sql.*;
+import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+
+public class DisplayModules {
+    private final JTable modulesTable;  // Holds data in a tabular format
+    private final JScrollPane jScrollPane1;  // JScrollPane to show module info
+    private final JButton jButton1;  // Button to display module info
+
+    // Constructor to initialize the JFrame and components
+    public DisplayModules() {
+        // Initializing the table, scroll pane, and button
+        modulesTable = new JTable();
+        jScrollPane1 = new JScrollPane(modulesTable);
+        jButton1 = new JButton("Display Module Info");
+
+        // Adding ActionListener to the button
+        jButton1.addActionListener(evt -> jButton1ActionPerformed(evt));
+
+        // JFrame layout setup
+        JFrame frame = new JFrame("Display Module Info");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setLayout(new BorderLayout());
+        frame.add(jScrollPane1, BorderLayout.CENTER);
+        frame.add(jButton1, BorderLayout.SOUTH);
+        frame.setSize(600, 400);
+        frame.setVisible(true);
+    }
+
+    // Method to handle button click and display module info from the database
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {
+        // Database connection parameters
+        String jdbcUrl = "jdbc:mysql://localhost:3306/school";  //
+        String username = "root";
+        String password = "";  // No password set in my DB
+
+        // SQL query to fetch data from the 'modules' table
+        String query = "SELECT Module_Code, Module_Name, Department, Credits, School FROM modules";
+
+        // Using try
+        try (Connection connection = DriverManager.getConnection(jdbcUrl, username, password);
+             Statement statement = connection.createStatement();
+             ResultSet resultSet = statement.executeQuery(query)) {
+
+            // Prepare the table model with column names
+            DefaultTableModel tableModel = new DefaultTableModel();
+            tableModel.addColumn("Module Code");
+            tableModel.addColumn("Module Name");
+            tableModel.addColumn("Department");
+            tableModel.addColumn("Credits");
+            tableModel.addColumn("School");
+
+            // Populate the table model with data from the results
+            while (resultSet.next()) {
+                String moduleCode = resultSet.getString("Module_Code");
+                String moduleName = resultSet.getString("Module_Name");
+                String department = resultSet.getString("Department");
+                int credits = resultSet.getInt("Credits");
+                String school = resultSet.getString("School");
+                tableModel.addRow(new Object[]{moduleCode, moduleName, department, credits, school});
+            }
+
+            // Set the table model to the JTable
+            modulesTable.setModel(tableModel);
+
+        } catch (SQLException e) {
+            // Show an error message if the database query fails
+            JOptionPane.showMessageDialog(null, "Error fetching data: " + e.getMessage());
+            
+        }
+    }
+    // Main method to run the DisplayModules application
+    public static void main(String[] args) {
+        javax.swing.SwingUtilities.invokeLater(DisplayModules::new);  // Initialize app and run it
+    }
+}
+________________________________________________________________________________________________________________________________________
