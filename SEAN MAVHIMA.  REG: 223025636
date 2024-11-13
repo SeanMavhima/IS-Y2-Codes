@@ -1,12 +1,12 @@
-STUDENT REG NUMBER: 223025636
+STUDENT REG NUMBER: 223025636 AND 223010721
 JAVA PROGRAMMING ASSIGNMENT
 
 QUESTION 1:
 
-#Reproducing the back interest calculation program using a loan object with three set parameters, default constructor[annual and monthly interest and number of years.
+#Reproducing the bank interest calculation program using a loan object with three set parameters, default constructor[annual and monthly interest and number of years.
 #Get from the created object, calculate interest from the created object, set and get monthly interest, use set method and use this keyword.
 #Calculate amount to be paid monthly and total amount to be paid.
-# Main[ program get monthly and total amount.
+# Main[ program get monthly and total amount.]
 
 CODE-SOLUTION##
 
@@ -127,15 +127,7 @@ public class Database_Connection {
 
 
 ------CODE TO INSERT A RECORD INTO students TABLE--
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 
-/**
- *
- * @author Admin
- */
 //CODE TO INSERT DATA INTO THE Students Table
 //SQL IMPORTS
 import java.sql.DriverManager;
